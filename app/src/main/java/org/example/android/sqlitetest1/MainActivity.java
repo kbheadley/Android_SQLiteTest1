@@ -8,6 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+
+//To see the records in Terminal:
+//adb shell
+//sqlite3 /data/org.example.android.sqlitetest1/databases/sqlite-test-1.db
+//select * from contacts;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SQLiteDatabase sqLiteDatabase = getBaseContext().openOrCreateDatabase("sqlite-test-1.db", MODE_PRIVATE,null);
-        sqLiteDatabase.execSQL("DROP TABLE contacts");
+        sqLiteDatabase.execSQL("DROP TABLE contacts");   //if you want to run it more than once, otherwise comment this out for first run
         sqLiteDatabase.execSQL("CREATE TABLE contacts(name TEXT, phone INTEGER, email TEXT)");
-        sqLiteDatabase.execSQL("INSERT INTO contacts VALUES('tim', 6456789,'tim@email.com');");
+        sqLiteDatabase.execSQL("INSERT INTO contacts VALUES('Tim', 6456789,'tim@email.com');");
         sqLiteDatabase.execSQL("INSERT INTO contacts VALUES('Fred', 12345,'fred@email.com');");
         Cursor query = sqLiteDatabase.rawQuery("SELECT * from contacts", null);
         if(query.moveToFirst()){
